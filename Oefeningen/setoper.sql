@@ -1,0 +1,2 @@
+-- 1. Geef een overzicht van alle spelers, gevolgd door alle bestuursleden, gesorteerd op jaar van toetreding of beginjaar van hun functie en vervolgens op spelersnr.
+-- Geen dubbels tonen.
