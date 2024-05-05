@@ -30,3 +30,15 @@ FROM ruimtereizen.reizen as r
 		FROM ruimtereizen.deelnames
 	) as d ON b.reisnr = d.reisnr
 WHERE max(sum(verblijfsduur) / count(d.reisnr))
+
+-- 4. Geef de planeet (draait dus rond de zon) met de meeste satellieten.
+-- Sorteer op objectnaam.
+SELECT objectnaam
+FROM ruimtereizen.hemelobjecten as h
+	SELF JOIN(
+		SELECT objectnaam
+		FROM ruimtereizen.hemelobjecten
+		WHERE satellietvan = r.objectnaam
+	) as hem ON h.objectnaam = hem.objectnaam
+WHERE satellietvan = 'Zon' and MAX(COUNT(hem.objectnaam))
+ORDER BY objectnaam
