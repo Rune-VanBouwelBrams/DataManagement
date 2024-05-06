@@ -22,3 +22,9 @@ inner join deelnames using(reisnr)
 group by reisnr
 order by deelnemers desc, reisnr
 
+-- 4. Geef een lijst van alle reizen met tenminste 1 bezoek of passage aan de Maan of aan Mars. 
+-- De lijst moet stijgend gesorteerd zijn op basis van het vertrekdatum.
+SELECT r.reisnr, vertrekdatum
+FROM reizen as r LEFT JOIN bezoeken USING(reisnr) LEFT JOIN hemelobjecten USING(objectnaam)
+WHERE objectnaam like 'Maan' or objectnaam like 'Mars'
+ORDER BY vertrekdatum

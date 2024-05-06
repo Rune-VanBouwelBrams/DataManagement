@@ -59,3 +59,10 @@ SELECT s.spelersnr, plaats, teamnr
 FROM spelers as s FULL OUTER JOIN wedstrijden as w ON s.spelersnr = w.spelersnr
 WHERE geslacht = 'V' AND (plaats = 'Den Haag' OR plaats = 'Zoetermeer' OR plaats = 'Leiden')
 ORDER BY spelersnr, plaats, teamnr
+
+-- 9. Geef per team het hoogste wedstrijdnummer van een wedstrijd, gespeeld door een bestuurslid (actief en niet meer actief) die geen boete heeft gekregen.
+-- Sorteer op teamnr.
+SELECT te.teamnr, max(wedstrijdnr) as laatstewedstrijd
+FROM teams as te LEFT OUTER JOIN wedstrijden as w ON te.spelersnr = w.spelersnr LEFT OUTER JOIN bestuursleden as be ON be.spelersnr = te.spelersnr LEFT OUTER JOIN boetes as b ON b.spelersnr = be.spelersnr
+WHERE bedrag = 0
+GROUP BY te.teamnr, b.bedrag
